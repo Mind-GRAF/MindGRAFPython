@@ -1,1 +1,17 @@
-
+class ReasoningController:
+    def ApplySubstitution ():
+        pass
+    def CheckCompatiableSubstitution ():
+        pass
+    def Request (source, destination):
+        pass
+    def SendReport(report,channel):
+        pass
+    def AddToKnownInstances(report, channel):
+        pass
+    def ForwardChain(report):
+        pass
+    def BackwardChain(report):
+        pass
+    def ProcessReportChannel(channel):
+        pass
