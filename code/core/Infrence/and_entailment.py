@@ -1,6 +1,5 @@
 from code.core.Infrence.apply import apply
 
-
 class and_entailment(apply):
     pass
 

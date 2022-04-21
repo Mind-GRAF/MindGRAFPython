@@ -1,12 +1,15 @@
 from code.core.Infrence.numerical_entailment import numerical_entailment
-
+from code.core.Infrence.numerical_entailment import or_entailment
+from code.core.Infrence.numerical_entailment import and_entailment
+from code.core.Infrence.numerical_entailment import andor
+from code.core.Infrence.numerical_entailment import thresh
 
 class apply:
     pass
 def apply(node,context):
     if(issupported(node,context)):
         checkcontext(context)
-        match x.name:
+        match node.name:
             case "or":
                 c = or_entailment(node,context)
             case "and":
