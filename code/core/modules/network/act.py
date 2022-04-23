@@ -1,6 +1,6 @@
 from pickle import FALSE, TRUE
 from pydoc import resolve
-from code.core.modules.network.agenda import agenda
+from agenda import agenda
 
 
 class act(Entity) :
