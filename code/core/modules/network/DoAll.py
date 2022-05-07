@@ -1,5 +1,9 @@
-from ControlAction import ControlAction
+
+from act import act
 
 
-class DoAll (ControlAction):
-    pass
+class DoAll (act):
+    def __init__(self) -> None:
+        super().__init__()    
+    def act ():
+        pass        
