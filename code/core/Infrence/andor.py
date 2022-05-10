@@ -1,4 +1,4 @@
-from code.core.Infrence.apply import apply
+from apply import apply
 
 class andor (apply):
     pass
