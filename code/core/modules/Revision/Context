@@ -1,0 +1,52 @@
+class Context: 
+    
+    def __init__(self):
+        pass 
+    
+    def __init__(self, name, hyps, id):
+        self.name = name
+        self.hyps = hyps
+        self.id   = id
+    
+    
+    hyps: { 
+        
+        "Beliefs" : "hanshoof" ,
+        "Desires" : "hanshoof",
+        "Intentions" : "nshoof"
+    }
+        #set of props per attitude that were user asserted
+        #key 3obar 3an ints
+    def get_context(self):
+         return self._name
+        
+    def addtoContext(Proposition p, Attitude a):  
+     hyps.update({a : p})
+        
+    def isSupported(Proposition p, Attitude a):
+     ('a', p) in hyps.items()
+     
+     
+    
+        
+   # Attitudes = hyps.keys()
+    #def search(Attitudes, a):
+     #     for i in range(len(Attitudes)):
+      #      if Attitudes[i] == a:
+       #       return True
+        #  return False
+        
+        
+                
+ 
+    #def contexttoString(self.id):
+    
+    
+    #def checkContradiction(Proposition p):
+    #def resolveContradiction():
+    
+    
+     
+     
+    
+          
