@@ -1,8 +1,8 @@
-from code.core.Infrence.numerical_entailment import numerical_entailment
-from code.core.Infrence.numerical_entailment import or_entailment
-from code.core.Infrence.numerical_entailment import and_entailment
-from code.core.Infrence.numerical_entailment import andor
-from code.core.Infrence.numerical_entailment import thresh
+from numerical_entailment import numerical_entailment
+from or_entailment import or_entailment
+from and_entailment import and_entailment
+from andor import andor
+from thresh import thresh
 
 class apply:
     pass
