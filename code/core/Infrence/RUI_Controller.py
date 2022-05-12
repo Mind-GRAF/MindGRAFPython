@@ -1,8 +1,8 @@
 from RUI import RUI
 
 class RUI_Controller:
-    RUI=[]
+    RUI=list
     
     
     def __init__(self):
-        self.RUI=list
+        self.RUI=[]
