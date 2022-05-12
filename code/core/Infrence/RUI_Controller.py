@@ -1,4 +1,3 @@
-from RUI import RUI
 
 class RUI_Controller:
     RUI=list
