@@ -7,7 +7,7 @@ from thresh import thresh
 class apply:
     pass
 def apply(node,context):
-    if(issupported(node,context)):
+    if(isSupported(node,context[node.attidude])):
         checkcontext(context)
         match node.name:
             case "or":
@@ -31,7 +31,7 @@ def checkcombatiblesubstitutions(x):
     #this is a stub or a driver
     return True
 
-def issupported(x,z):
+def isSupported(x,z):
     #this is a stub or a driver
     return True
 
