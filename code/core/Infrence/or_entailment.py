@@ -1,9 +1,7 @@
-from apply import apply
-
-class or_entailment(apply):
+class or_entailment:
     pass
 
-def or_entailment(node ,context ):
-    for e in node.ant:
-        if (e==True):
-            return node.con
+def or_entailment(node ):
+    for e in node.node.downCableS.antecedents:
+        if (antecedents(e)==True):
+            return node.downCableS.consequents

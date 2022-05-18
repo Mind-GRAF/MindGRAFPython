@@ -4,24 +4,23 @@ from and_entailment import and_entailment
 from andor import andor
 from thresh import thresh
 
-class apply:
-    pass
+
 def apply(node,context):
-    if(isSupported(node,context[node.attidude])):
+    if(isSupported(node,context[node])):
         checkcontext(context)
         match node.name:
             case "or":
-                c = or_entailment(node,context)
+                c = or_entailment(node)
             case "and":
-                c = and_entailment(node,context)
+                c = and_entailment(node)
             case "andor":
-                c = andor(node,context)
+                c = andor(node)
             case "thresh":
-                c = thresh(node,context)
+                c = thresh(node)
             case "numerical_entailment":
-                c = numerical_entailment(node,context)
+                c = numerical_entailment(node)
         if(checkcombatiblesubstitutions(c)):
-            combinesupports(context.supports)
+            combinesupports(node.supports)
             report(c,node.supports,node.name,node.source,node.destination)
 
 def combinesupports(n):

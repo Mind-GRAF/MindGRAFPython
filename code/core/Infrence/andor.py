@@ -1,18 +1,16 @@
-from apply import apply
-
-class andor (apply):
+class andor :
     pass
 
-def andor(node ,context ):
+def andor(node  ):
     min = node.i
     max = node.j
-    counter =0
-    for e in node.ant:
-        if(e==True):
+    counter = 0
+    for e in node.node.downCableS.antecedents:
+        if(antecedents(e)==True):
             counter+=1
             if(counter==max):
-                node.con=node.ant.iter(max)
-                return node.con
+                node.downCableS.consequents=node.downCableS.antecedents.iter(max)
+                return node.downCableS.consequents
             elif(counter==min):
-                node.con=node.ant.remove(node.ant.iter(node.size-min))
-                return node.con
+                node.downCableS.consequents=node.downCableS.antecedents.remove(node.ant.iter(node.size-min))
+                return node.downCableS.consequents

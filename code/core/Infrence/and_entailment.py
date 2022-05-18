@@ -1,15 +1,13 @@
-from apply import apply
-
-class and_entailment(apply):
+class and_entailment:
     pass
 
-def and_entailment(node ,context ):
+def and_entailment(node):
     flag=False
-    for e in node.ant:
-        if (e==True):
+    for e in node.downCableS.antecedents:
+        if (antecedents(e)==True):
             flag=True
         else:
             flag=False
             break
     if(flag==True):
-        return node.con
+        return node.downCableS.consequents

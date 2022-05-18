@@ -1,14 +1,12 @@
-from apply import apply
-
-class thresh(apply):
+class thresh:
     pass
 
-def thresh(node ,context ):
+def thresh(node ):
     min = node.i
     max = node.j
     counter = 0
-    for e in node.ant:
-        if(e==True):
+    for e in node.node.downCableS.antecedents:
+        if(antecedents(e)==True):
             counter+=1
             if(counter<max&counter>=min):
-                return node.con
+                return node.downCableS.consequents
