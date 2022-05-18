@@ -1,5 +1,5 @@
 def numerical_entailment(node  ):
-    min = node.i
+    min = node.downCableS.min
     counter = 0
     for e in node.downCableS.antecedents:
         for i in node.downCableS.antecedents(e).supports:

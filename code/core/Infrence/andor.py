@@ -1,6 +1,6 @@
 def andor(node):
-    min = node.x
-    max = node.y
+    min = node.downCableS.min
+    max = node.downCableS.max
     counter = 0
     for e in node.downCableS.antecedents:
         for i in node.downCableS.antecedents(e).supports:
