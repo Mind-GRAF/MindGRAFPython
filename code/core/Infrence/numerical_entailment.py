@@ -1,5 +1,3 @@
-class numerical_entailment:
-    pass
 def numerical_entailment(node  ):
     min = node.i
     counter = 0

@@ -1,6 +1,3 @@
-class andor :
-    pass
-
 def andor(node):
     min = node.x
     max = node.y

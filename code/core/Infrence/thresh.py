@@ -1,6 +1,3 @@
-class thresh:
-    pass
-
 def thresh(node):
     min = node.i
     max = node.j
