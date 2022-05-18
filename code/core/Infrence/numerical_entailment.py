@@ -3,7 +3,7 @@ class numerical_entailment:
 def numerical_entailment(node  ):
     min = node.i
     counter = 0
-    for e in node.node.downCableS.antecedents:
+    for e in node.downCableS.antecedents:
         if (antecedents(e)==True) :
             counter+=1
             if counter>= min:
