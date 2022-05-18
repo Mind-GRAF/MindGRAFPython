@@ -7,7 +7,7 @@ from thresh import thresh
 
 def apply(node,context):
     if(isSupported(node,context[node])):
-        checkcontext(context)
+        checkcontext(context.Propostion)
         match node.name:
             case "or":
                 c = or_entailment(node)

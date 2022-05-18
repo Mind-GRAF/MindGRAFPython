@@ -3,5 +3,6 @@ class or_entailment:
 
 def or_entailment(node ):
     for e in node.downCableS.antecedents:
-        if (antecedents(e)==True):
-            return node.downCableS.consequents
+        for i in node.downCableS.antecedents(e).propositionset:
+            if (antecedents(e).propositionset(i).sign==True):
+                return node.downCableS.consequents
