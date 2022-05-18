@@ -20,12 +20,13 @@ def apply(node,context):
             case "numerical_entailment":
                 c = numerical_entailment(node)
         if(checkcombatiblesubstitutions(c)):
-            combinesupports(node.supports)
-            report(c,node.supports,node.name,node.source,node.destination)
+            x = node.downCableS.antecedents.append(c)
+            x = combinesupports(x)
+            report(c,x,node.name,node.source,node.destination)
 
 def combinesupports(n):
     #this is a stub or a driver
-    return True
+    return n
 def checkcombatiblesubstitutions(x):
     #this is a stub or a driver
     return True
