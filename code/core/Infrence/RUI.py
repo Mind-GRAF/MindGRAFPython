@@ -1,6 +1,6 @@
-from RUI_Controller import RUI_Controller
+from RUISet import RUISet
 
-class RUI(RUI_Controller):
+class RUI(RUISet):
     Subs =list
     Pcount=int
     Ncount=int
