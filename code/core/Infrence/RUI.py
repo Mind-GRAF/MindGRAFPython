@@ -14,3 +14,11 @@ class RUI(RUI_Controller):
         self.Fns=True
         self.InfType=""
         super().__init__('RUI')
+
+    def isVarsCompatible(self,r):
+        return True
+    
+    def isDisjoint(self,r):
+        return True
+    def combine(self,r):
+        return self+r
