@@ -1,3 +1,4 @@
+from platform import node
 from typing import Type
 from numerical_entailment import numerical_entailment
 from or_entailment import or_entailment
@@ -9,26 +10,65 @@ from PropositionNode import PropositionNode
 
 class RuleNode(PropositionNode):
     name = str
-    Type = str
-    antecedents = list
-    consequents = list
+    ant = list
+    cq = list
     downCableS = list
     min = int
     max = int
 
 
-def __init__(self, downCableS, name):
-    self.name = name
+def __init__(self, downCableS):
     self.downCableS = downCableS
-    self.antecedents = self.downCableS.antecedents
-    self.consequents = self.downCableS.consequents
+    for i in len(downCableS):
+        if downCableS(i).relation.getname() == "i":
+            self.name = "numerical_entailment"
+        elif downCableS(i).relation.getname() == "thresh":
+            self.name = "thresh"
+        elif downCableS(i).relation.getname() == "ant":
+            self.name = "or"
+        elif downCableS(i).relation.getname() == "max":
+            self.name = "andor"
+        else:
+            self.name = "and"
 
-    if self.downCableS.min & self.downCableS.max:
-        self.Type = "andor,thresh"
-    elif self.downCableS.min:
-        self.Type = "numerical"
-    else:
-        self.Type = "and-Entailment,or-Entailment"
+    if self.name == "and":
+        for i in len(self.downCableS):
+            if downCableS(i).relation.getname() == "&ant":
+                self.ant = downCableS(i).getnodeset()
+            else:
+                self.cq = downCableS(i).getnodeset()
+    elif self.name == "or":
+        for i in len(self.downCableS):
+            if downCableS(i).relation.getname() == "ant":
+                self.ant = downCableS(i).getnodeset()
+            else:
+                self.cq = downCableS(i).getnodeset()
+    elif self.name == "numerical_entailment":
+        for i in len(self.downCableS):
+            if downCableS(i).relation.getname() == "&ant":
+                self.ant = downCableS(i).getnodeset()
+            elif downCableS(i).relation.getname() == "cq":
+                self.cq = downCableS(i).getnodeset()
+            else:
+                self.min = downCableS(i).i
+    elif self.name == "andor":
+        for i in len(self.downCableS):
+            if downCableS(i).relation.getname() == "arg":
+                self.ant = downCableS(i).getnodeset()
+                self.cq = downCableS(i).getnodeset()
+            elif downCableS(i).relation.getname() == "max":
+                self.max = downCableS(i).max
+            else:
+                self.min = downCableS(i).min
+    elif self.name == "thresh":
+        for i in len(self.downCableS):
+            if downCableS(i).relation.getname() == "arg":
+                self.ant = downCableS(i).getnodeset()
+                self.cq = downCableS(i).getnodeset()
+            elif downCableS(i).relation.getname() == "threshmax":
+                self.max = downCableS(i).threshmax
+            else:
+                self.min = downCableS(i).thresh
 
 
 def apply(RuleNode, attuide):
