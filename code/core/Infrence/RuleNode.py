@@ -7,6 +7,7 @@ from thresh import thresh
 
 
 class RuleNode:
+    name = str
     Type = str
     antecedents = list
     consequents = list
@@ -15,7 +16,8 @@ class RuleNode:
     max = int
 
 
-def __init__(self, downCableS):
+def __init__(self, downCableS, name):
+    self.name = name
     self.downCableS = downCableS
     self.antecedents = self.downCableS.antecedents
     self.consequents = self.downCableS.consequents
@@ -28,24 +30,24 @@ def __init__(self, downCableS):
         self.Type = "and-Entailment,or-Entailment"
 
 
-def apply(node, context, attuide):
-    if isSupported(node, attuide):
-        if checkcombatiblesubstitutions(node.downCableS.antecedents):
-            match node.name:
+def apply(RuleNode, attuide):
+    if isSupported(RuleNode, attuide):
+        if checkcombatiblesubstitutions(RuleNode.downCableS.antecedents):
+            match RuleNode.name:
                 case "or":
-                    c = or_entailment(node)
+                    c = or_entailment(RuleNode)
                 case "and":
-                    c = and_entailment(node)
+                    c = and_entailment(RuleNode)
                 case "andor":
-                    c = andor(node)
+                    c = andor(RuleNode)
                 case "thresh":
-                    c = thresh(node)
+                    c = thresh(RuleNode)
                 case "numerical_entailment":
-                    c = numerical_entailment(node)
+                    c = numerical_entailment(RuleNode)
         if checkcombatiblesubstitutions(c):
-            x = node.downCableS.antecedents.append(c)
+            x = RuleNode.downCableS.antecedents.append(c)
             n = combinesupports(x)
-            report(c, n, node.name, node.source, node.destination)
+            report(c, n, RuleNode.name, RuleNode.source, RuleNode.destination)
 
 
 def combinesupports(n):
