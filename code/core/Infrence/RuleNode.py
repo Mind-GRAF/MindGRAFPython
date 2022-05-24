@@ -1,5 +1,3 @@
-from platform import node
-from typing import Type
 from numerical_entailment import numerical_entailment
 from or_entailment import or_entailment
 from and_entailment import and_entailment

@@ -1,10 +1,10 @@
 def thresh(RuleNode):
-    min = RuleNode.downCableS.min
-    max = RuleNode.downCableS.max
+    min = RuleNode.min
+    max = RuleNode.max
     counter = 0
-    for e in RuleNode.downCableS.antecedents:
-        for i in RuleNode.downCableS.antecedents(e).supports:
-            if RuleNode.downCableS.antecedents(e).supports(i).sign == True:
+    for e in RuleNode.ant:
+        for i in RuleNode.ant(e).supports:
+            if RuleNode.ant(e).supports(i).sign == True:
                 counter += 1
                 if counter < max & counter >= min:
-                    return RuleNode.downCableS.consequents
+                    return RuleNode.cq

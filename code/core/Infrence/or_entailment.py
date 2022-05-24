@@ -1,5 +1,5 @@
 def or_entailment(RuleNode):
-    for e in RuleNode.downCableS.antecedents:
-        for i in RuleNode.downCableS.antecedents(e).supports:
-            if RuleNode.downCableS.antecedents(e).supports(i).sign == True:
-                return RuleNode.downCableS.consequents
+    for e in RuleNode.ant:
+        for i in RuleNode.ant(e).supports:
+            if RuleNode.ant(e).supports(i).sign == True:
+                return RuleNode.cq
