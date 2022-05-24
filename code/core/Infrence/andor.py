@@ -1,14 +1,20 @@
-def andor(node):
-    min = node.downCableS.min
-    max = node.downCableS.max
+def andor(RuleNode):
+    min = RuleNode.downCableS.min
+    max = RuleNode.downCableS.max
     counter = 0
-    for e in node.downCableS.antecedents:
-        for i in node.downCableS.antecedents(e).supports:
-            if(node.downCableS.antecedents(e).supports(i).sign==True):
-                counter+=1
-                if(counter==max):
-                    node.downCableS.consequents=node.downCableS.antecedents.iter(max)
-                    return node.downCableS.consequents
-                elif(counter==min):
-                    node.downCableS.consequents=node.downCableS.antecedents.remove(node.ant.iter(node.size-min))
-                    return node.downCableS.consequents
+    for e in RuleNode.downCableS.antecedents:
+        for i in RuleNode.downCableS.antecedents(e).supports:
+            if RuleNode.downCableS.antecedents(e).supports(i).sign == True:
+                counter += 1
+                if counter == max:
+                    RuleNode.downCableS.consequents = (
+                        RuleNode.downCableS.antecedents.iter(max)
+                    )
+                    return RuleNode.downCableS.consequents
+                elif counter == min:
+                    RuleNode.downCableS.consequents = (
+                        RuleNode.downCableS.antecedents.remove(
+                            RuleNode.ant.iter(RuleNode.size - min)
+                        )
+                    )
+                    return RuleNode.downCableS.consequents

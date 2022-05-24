@@ -4,9 +4,10 @@ from or_entailment import or_entailment
 from and_entailment import and_entailment
 from andor import andor
 from thresh import thresh
+from PropositionNode import PropositionNode
 
 
-class RuleNode:
+class RuleNode(PropositionNode):
     name = str
     Type = str
     antecedents = list
