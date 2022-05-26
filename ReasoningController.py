@@ -31,9 +31,9 @@ class ReasoningController:
     type: inference type BackwardChain or ForwardChain
 
     """
-    def Request (source,destination,status,type,context):
+    def Request (source: Node,destination: Node,status: bool,type,context: Context):
         request = Channel(source,destination,status,type,context)
-    def SendReport(report,channel):
+    def SendReport(report: Report,channel: Channel):
         channel = Channel
         if channel.reportToSend(report):
             print("Report:", report , "was sent from" , channel.getSource(), "to", channel.getDestination )
@@ -41,19 +41,20 @@ class ReasoningController:
             print("Report:", report , "could not be sent from" , channel.getSource(), "to", channel.getDestination )
         channel.clearReportsBuffer()
 
-    def AddToKnownInstances(report):
+    def AddToKnownInstances(report: Report):
         instances = KnownInstances
         instances.addReport(report)
 
-    def ForwardChain(report):
+    def ForwardChain(node: Node, context: Context, attitude: Node):
         Runner.run()
         report = Report
         contextName = MindGRAFController.get
         ReasoningController.getNodesToSendReport(ChannelType.RULEANT, contextName, None, "FORWARD" ,report.getSource,report.getDestination)
         ReasoningController.getNodesToSendReport(ChannelType.MATCHED, contextName, None, "FORWARD" ,report.getSource,report.getDestination)
-    def BackwardChain(report):
-        pass
-    def ProcessReportChannel(channel):
+        return "nodeSet"
+    def BackwardChain(node: Node, context: Context, attitude: Node):
+        return "nodeSet"
+    def ProcessReportChannel(channel: Channel):
         channel = Channel
         reports = Report
         reports = [channel.getReportsBuffer]        
@@ -71,7 +72,7 @@ class ReasoningController:
         channel.clearReportsBuffer
 
 
-    def getNodesToSendReport(self,type, context, substitutions, inferenceType,source,destination):
+    def getNodesToSendReport(self,type, context: Context, substitutions: Substitutions, inferenceType,source: Node,destination: Node):
         suppSet = supportSet()
         suppSet.add(suppSet.getId())
         report = Report(substitutions,suppSet,inferenceType,source,destination)
@@ -86,7 +87,7 @@ class ReasoningController:
                     ReasoningController.sendReportToNodeSet(antNodes,report,context,type)
 
     
-    def sendReportToMatches(matched,report,context):
+    def sendReportToMatches(matched: Matcher,report: Report,context: Context):
         for currentMatch in matched:
             reportSubs= Substitutions
             reportSubs.getSubs()
@@ -95,12 +96,12 @@ class ReasoningController:
             newChannel = Channel(currentMatch,"destinaion","status",ChannelType.MATCHED,context)
             ReasoningController.sendReport(report,newChannel)
 
-    def sendReportToNodeSet(nodeSet, report, context, type,source, destination):
+    def sendReportToNodeSet(nodeSet: NodeSet, report: Report, context: Context, type,source: Node, destination: Node):
         for sent in nodeSet:
             report = Report
             reportSubs = report.getSubstitution()
             newChannel = Channel(source,destination,type,"status",type,context)
             ReasoningController.SendReport(report,newChannel)
 
-    def isAsserted(context):
+    def isAsserted(context: Context):
         pass

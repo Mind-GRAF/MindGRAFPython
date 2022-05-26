@@ -1,19 +1,19 @@
-from Report import report
+from Report import Report
 from ReportSet import reportSet
 from Substitutions import Substitutions
 from Substitutions import Substitutions
-class KnownInstances(report):
+class KnownInstances(Report):
     global knowninstances
     knowninstances = {
             'Substitutions' : reportSet
     }
 
-    def __init__(knowninstances,substitution, support,source,destination):
+    def __init__(knowninstances: KnownInstances ,substitution: Substitutions, support: supportSet ,source: Node ,destination: Node):
         super.__init__(substitution, support,source,destination)
      
 
-    def addReport(report):
-        reportSubs = Substitutions
+    def addReport(report: Report):
+        reportSubs: Substitutions
         reportSubs = report
         report.getSubstitution()
         reportSet = knowninstances.pop(reportSubs)
@@ -23,8 +23,8 @@ class KnownInstances(report):
         knowninstances.update(reportSubs,reportSet)
 
 
-    def getReportBySubs(Subs):
+    def getReportBySubs(Subs: Substitutions):
         return knowninstances.get('Substitutions')
     
-    def getSubstitution(report):
+    def getSubstitution(report: Report):
         pass

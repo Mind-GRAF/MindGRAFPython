@@ -2,7 +2,7 @@ from Channel import Channel
 import ChannelType
 class ChannelSet(Channel):
    
-    def __init__(channel,id,filter,switch,source,destination,status,type):
+    def __init__(channel: Channel,id,filter: Filter ,switch: Switch,source: Node ,destination: Node,status: bool,type):
         global channels
         super().__init__(id,filter,switch,source,destination,status,type)
         MatchedChannels = {
@@ -15,21 +15,21 @@ class ChannelSet(Channel):
             'RuleToCons' : channel
         } 
 
-    def addChannel(channel):
+    def addChannel(channel: Channel):
         channelSourceId = channel.source.id
         channelDestinationId= channel.destination.id
         filtersubs = channel.filter.substitutions
         switchsubs = channel.channel.substitutions
         channelType = channel.getChannelType(channel)
         
-    def removeChannel(channel):
+    def removeChannel(channel: Channel):
         channelSourceId = channel.source.id
         channelDestinationId= channel.destination.id
         filtersubs = channel.filter.substitutions
         switchsubs = channel.channel.substitutions
         channelType = channel.getChannelType(channel)
 
-    def getChannelType(channel):
+    def getChannelType(channel: Channel):
         channeltype =''
         if (ChannelType.RULEANT):
             channeltype = 'AntecedentToRule Channel'

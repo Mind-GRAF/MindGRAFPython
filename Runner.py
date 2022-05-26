@@ -37,9 +37,9 @@ class Runner():
                 if highQ and lowQ:
                     Runner.run()
         
-    def addToHighQ(node):
+    def addToHighQ(node: Node):
         highQ.append(node)
-    def addToLowQ(node):
+    def addToLowQ(node: Node):
         lowQ.append(node)    
-    def addToActQ(node):
+    def addToActQ(node: Node):
         actQ.append(node)

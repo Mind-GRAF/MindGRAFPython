@@ -6,18 +6,19 @@ from Proposition import Proposition
 from ReportSet import ReportSet
 from Switch import Switch
 import ChannelType
+from Substitutions import Substitutions
 
 class Channel:
     global count
     count = 0
     global filter
-    filter = Filter()
+    filter: Filter
     global switch
-    switch = Switch()
+    switch: Switch
     global reportBuffer
-    reportBuffer = ReportSet()
+    reportBuffer: ReportSet
 
-    def __init__ (channel,id,source,destination,status,type,context):
+    def __init__ (channel,id,source: Node,destination: Node,status: bool ,type: String ,context: Context):
         channel.id = count
         channel.source = source
         channel.destination = destination
@@ -26,7 +27,7 @@ class Channel:
         channel.context = context
     count +1
     
-    def reportToSend(self,report):
+    def reportToSend(self,report: Report):
         canPass = filter.canPass(report)
         if canPass: # and isAsserted(report)
             Switch.switchReport(report)
@@ -34,44 +35,44 @@ class Channel:
             Proposition.recieveReport(self)
             self.getReportsBuffer().addReport(report)
 
-    def getId(channel):
+    def getId(channel: Channel):
         return channel.id
 
-    def setSubstitution(channel,substitution):
+    def setSubstitution(channel: Channel,substitution: Substitutions):
         channel.substitution = substitution
 
-    def getSupport(channel):
+    def getSupport(channel: Channel):
         return channel.support
 
-    def getFilter(channel):
+    def getFilter(channel: Channel):
         return channel.filter
         
-    def getType(channel):
+    def getType(channel: Channel):
         return channel.type
 
-    def setFilter(channel,filter):
+    def setFilter(channel: Channel,filter: Filter):
         channel.filter = filter
 
-    def getDestination(channel):
+    def getDestination(channel: Channel):
         return channel.destination
 
-    def setDestination(channel,destination):
+    def setDestination(channel: Channel,destination: Node):
         channel.destination = destination
 
-    def getSource(channel):
+    def getSource(channel: Channel):
         return channel.source
 
-    def setSource(channel,source):
+    def setSource(channel: Channel,source: Node):
         channel.source = source
 
-    def setReportsBuffer(self,reportsBuffer):
+    def setReportsBuffer(self,reportsBuffer: ReportSet):
         self.reportsBuffer = reportBuffer
 
     def getReportsBuffer():
         return reportBuffer
 
-    def clearReportsBuffer(self,reportsBuffer):
+    def clearReportsBuffer(self,reportsBuffer: ReportSet):
         self.getReportsBuffer().clearReports()
 
-    def getContext(channel):
+    def getContext(channel: Channel):
         return channel.context

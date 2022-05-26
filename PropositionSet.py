@@ -5,5 +5,5 @@ class PropositionSet():
     def __init__(self) -> None:
         pass
     
-    def addProp(node):
+    def addProp(node: Node):
         PropositionSet.propositions.add(node)

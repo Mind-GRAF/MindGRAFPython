@@ -7,13 +7,13 @@ class ReportSet(Report):
     def __innit__(self):
         pass
 
-    def addReport(reports,report):
+    def addReport(reports,report: Report):
         reports.append(report)
 
     def clearReports(reports):
         reports.clear()
 
-    def removeReport(reports,report):
+    def removeReport(reports,report: Report):
         reports.remove(report)
 
     def iterator(reports):
