@@ -4,10 +4,10 @@ class Filter:
     def __init__(filter: Filter,report: Report):
         filter.report = report
     
-    def canPass(report: Report,attitude: Node):
-        for i in self.substitution.cardinality():
+    def canPass(report: Report,attitude: str):
+        for x in self.substitution.cardinality():
             currentFilterBinding: Bindings  
-            currentFilterBinding = substitution.getBinding(i)
+            currentFilterBinding = substitution.getBinding(x)
             currentReportBinding: Bindings  
             currentReportBinding = report.getSubstitutions().getBindingByVariable(currentFilterBinding.getVariable())
             System.out.println("Bindings " + currentFilterBinding + " " + report.getSubstitutions())

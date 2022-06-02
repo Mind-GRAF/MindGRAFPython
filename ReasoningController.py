@@ -14,8 +14,10 @@ from ChannelType import ChannelType
 from RuleNode import RuleNode
 from NodeSet import NodeSet
 from Runner import Runner
+from Context import Context
 from MindGRAFController import MindGRAFController
 class ReasoningController:
+    global knownInstances= KnownInstances()
     def ApplySubstitution ():
         pass
     def CheckCompatiableSubstitution ():
@@ -31,34 +33,36 @@ class ReasoningController:
     type: inference type BackwardChain or ForwardChain
 
     """
-    def Request (source: Node,destination: Node,status: bool,type,context: Context):
+    def Request (self,source: Node,destination: Node,status: bool,type,context: Context):
         request = Channel(source,destination,status,type,context)
-    def SendReport(report: Report,channel: Channel):
-        channel = Channel
+        Runner.addToLowQ(request)
+    def SendReport(self,report: Report,channel: Channel):
         if channel.reportToSend(report):
             print("Report:", report , "was sent from" , channel.getSource(), "to", channel.getDestination )
         else:
             print("Report:", report , "could not be sent from" , channel.getSource(), "to", channel.getDestination )
         channel.clearReportsBuffer()
 
-    def AddToKnownInstances(report: Report):
-        instances = KnownInstances
-        instances.addReport(report)
+    def AddToKnownInstances(self,channel: Channel,report: Report):
+        knownInstances.addReport(report)
 
-    def ForwardChain(node: Node, context: Context, attitude: Node):
+    def ForwardChain(self,node: Node, context: Context, attitude: str):
         Runner.run()
-        report = Report
-        contextName = MindGRAFController.get
-        ReasoningController.getNodesToSendReport(ChannelType.RULEANT, contextName, None, "FORWARD" ,report.getSource,report.getDestination)
-        ReasoningController.getNodesToSendReport(ChannelType.MATCHED, contextName, None, "FORWARD" ,report.getSource,report.getDestination)
+        contextName = MindGRAFController.getContext()
+        self.getNodesToSendReport(ChannelType.RULEANT, contextName, None, "FORWARD" ,None,None)
+        self.getNodesToSendReport(ChannelType.MATCHED, contextName, None, "FORWARD" ,None,None)
+        #CheckContradiction("Built node: Node") after building
         return "nodeSet"
-    def BackwardChain(node: Node, context: Context, attitude: Node):
+    def BackwardChain(self, node: Node, context: Context, attitude: str):
+        Runner.run()
+        contextName = MindGRAFController.getContext()
+        self.getNodesToSendReport(ChannelType.RULEANT, contextName, None, "BACKWARD" ,None,None)
+        self.getNodesToSendReport(ChannelType.MATCHED, contextName, None, "BACKWARD" ,None,None)
         return "nodeSet"
-    def ProcessReportChannel(channel: Channel):
-        channel = Channel
-        reports = Report
+    def ProcessReportsChannel(self, channel: Channel):
+        reports: Report
         reports = [channel.getReportsBuffer]        
-        currReport = Report
+        currReport: Report
         for currReport in reports:
             report = Report(currReport.getSubstitution,currReport.getSupport,currReport.getInference,currReport.getSource,currReport.getDestination)
             knownInstances = KnownInstances
@@ -70,9 +74,39 @@ class ReasoningController:
                 outChannel.addReport(report)
             channel.clearReportsBuffer
         channel.clearReportsBuffer
+    def processRequestsChannel(self, channel: Channel):
+        str currentContextName = channel.getContext()
+        desiredContext: Context
+        desiredContext = currentContextName
+        attitude = desiredContext.getAttitude()
+        if(isSupported(desiredContext)):
+            int propNodeId = getId()
+            supportPropSet = PropositionSet()
+            supportPropSet = supportPropSet.add(propNodeId)
+            reply = Report("subs".supportPropSet,"BACKWARD",None,None,attitude)
+            self.sendReport(reply,channel)
+        else
+            bool sentAtLeastOne = false
+            currentReport: Report
+            for(currentReport : knownInstances):
+                sentAtLeastOne |= sendReport(currentReport, channel)
+            filterSubs = channel.getFilter().getSubstitutions()
+            if(not sentAtLeastOne):
+                dominatingRules: NodeSet
+                dominatingRules=getUpConsNodeSet()
+                toBeSentToDom: NodeSet
+                toBeSentToDom = self.removeAlreadyWorkingOn(dominatingRules,channel,filterSubs,false)
+                self.sendRequestsToNodeSet(toBeSentToDom,filterSubs,currentContextName,ChannelTypes.RULEANT)
+                if(not(isinstance(currentChannel,MatchChannel)):
+                    matchingNodes: Matcher 
+                    matchingNodes.match(this,filterSubs)
+                    toBeSentToMatch: Matcher
+                    toBeSentToMatch = self.removeAlreadyWorkingOn(matchingNodes,channel)
+                    self.sendRequestsToMatches(toBeSentToMatch,currentContextName)
 
 
-    def getNodesToSendReport(self,type, context: Context, substitutions: Substitutions, inferenceType,source: Node,destination: Node):
+
+    def getNodesToSendReport(self,type, context: Context, substitutions: Substitutions, inferenceType: str ,source: Node,destination: Node):
         suppSet = supportSet()
         suppSet.add(suppSet.getId())
         report = Report(substitutions,suppSet,inferenceType,source,destination)
@@ -80,28 +114,28 @@ class ReasoningController:
             case 'MATCHED': 
                 matches = [Matcher.Match]
                 if matches: 
-                    ReasoningController.sendReportToMatches(matches,report,context)
+                    self.sendReportToMatches(matches,report,context)
             case 'RULEANT':
                 if isinstance(self,RuleNode):
                     antNodes = NodeSet.getDownAnt()
-                    ReasoningController.sendReportToNodeSet(antNodes,report,context,type)
+                    self.sendReportToNodeSet(antNodes,report,context,type)
 
     
-    def sendReportToMatches(matched: Matcher,report: Report,context: Context):
+    def sendReportToMatches(self,matched: Matcher,report: Report,context: Context):
         for currentMatch in matched:
             reportSubs= Substitutions
             reportSubs.getSubs()
             currentMatch = Matcher
             #matchType = currentMatch.getMatchType()
             newChannel = Channel(currentMatch,"destinaion","status",ChannelType.MATCHED,context)
-            ReasoningController.sendReport(report,newChannel)
+            self.sendReport(report,newChannel)
 
-    def sendReportToNodeSet(nodeSet: NodeSet, report: Report, context: Context, type,source: Node, destination: Node):
+    def sendReportToNodeSet(nself,nodeSet: NodeSet, report: Report, context: Context, type: str,source: Node, destination: Node):
         for sent in nodeSet:
             report = Report
             reportSubs = report.getSubstitution()
             newChannel = Channel(source,destination,type,"status",type,context)
-            ReasoningController.SendReport(report,newChannel)
+            self.SendReport(report,newChannel)
 
-    def isAsserted(context: Context):
+    def isSupported(self,context: Context):
         pass

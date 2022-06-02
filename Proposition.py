@@ -7,29 +7,32 @@ from Runner import Runner
 
 import ChannelSet
 import supportSet
-class Proposition():
+class Proposition(Entity):
     global outgoingChannels
     outgoingChannels: ChannelSet
     global incomingChannels
     incomingChannels: ChannelSet
     global supports
-    supports = supportSet
+    supports: supportSet
 
 
-    def __init__(self):
-        pass
+    def __init__(self,outgoingChannels: ChannelSet,incomingChannels: ChannelSet,supports: supportSet):
+        self.outgoingChannels = outgoingChannels
+        self.incomingChannels = incomingChannels
+        self.supports = supports
+        
 
     def processReports():
         for x in incomingChannels:
             ReasoningController.ProcessReportChannel(x)
             
-    def recieveReport(channel: Channel):
+    def recieveReport(self,channel: Channel):
         Runner.addToHighQ(channel)
     
-    def addToOutgoingChannels(channel: Channel):
+    def addToOutgoingChannels(self, channel: Channel):
         outgoingChannels.addChannel(channel)
     
-    def addToIncomingChannels(channel: Channel):
+    def addToIncomingChannels(self, channel: Channel):
         incomingChannels.addChannel(channel)
             
 

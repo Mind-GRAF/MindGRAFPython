@@ -1,40 +1,54 @@
 from Substitutions import Substitutions
 class Report:
-    def __init__(report: Report,substitution: Substitutions,support: supportSet,inference: str,source: Node,
-    destination: Node,attitude: Node):
-        report.substitution = substitution
-        report.support = support
-        report.inference = inference
-        report.destination = destination
-        report.source = source
-        report.attitude = attitude
+    def __init__(self,substitution: Substitutions,support: supportSet,inference: str,source: Node,
+    destination: Node,attitude: str):
+        self.substitution = substitution
+        self.support = support
+        self.inference = inference
+        self.destination = destination
+        self.source = source
+        self.attitude = attitude
 
-    def getSubstitution(report: Report):
-        return report.substitution
+    def getSubstitution(self):
+        return self.substitution
 
-    def setSubstitution(report: Report,substitution: Substitutions):
-        report.substitution = substitution
+    def setSubstitution(self,substitution: Substitutions):
+        self.substitution = substitution
 
-    def getSupport(report: Report):
-        return report.support
+    def getSupport(self):
+        return self.support
 
-    def getInference(report): Report:
-        return report.inference
+    def getInference(self): 
+        return self.inference
 
-    def setInference(report: Report,inference: str):
-        report.inference = inference
+    def setInference(self,inference: str):
+        self.inference = inference
 
-    def getDestination(report: Report):
-        return report.destination
+    def getDestination(self):
+        return self.destination
 
-    def setDestination(report: Report,destination: Node):
-        report.destination = destination
+    def setDestination(self,destination: Node):
+        self.destination = destination
 
-    def getSource(report: Report):
-        return report.source
+    def getSource(self):
+        return self.source
 
-    def setSource(report: Report,source: Node):
-        report.source = source
+    def setSource(self,source: Node):
+        self.source = source
+
+    def computeReportFromDifferencesToSend(self,report: Report):
+        instanceInfType = self.getInferenceType()
+        reportInfType = report.getInferenceType()
+        instanceSupport = self.getSupport()
+        reportSupport = report.getSupport()
+        bool supportCheck = instanceSupport is reportSupport
+        if(instanceInfType == "BACKWARD" and reportInfType == "FORWARD"):
+            return report
+        else if(not supportCheck):
+            if(instanceInfType == "FORWARD" and reportInfType == "BACKWARD")
+                report.setInferenceType("FORWARD")
+            return report
+        return None
 
 #report = Report(15,5,5,5,5)
 #print(report.getSubstitution())

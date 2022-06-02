@@ -18,7 +18,7 @@ class Channel:
     global reportBuffer
     reportBuffer: ReportSet
 
-    def __init__ (channel,id,source: Node,destination: Node,status: bool ,type: String ,context: Context):
+    def __init__ (channel,id,source: Node,destination: Node,status: bool ,type: str ,context: Context):
         channel.id = count
         channel.source = source
         channel.destination = destination
@@ -29,11 +29,15 @@ class Channel:
     
     def reportToSend(self,report: Report):
         canPass = filter.canPass(report)
-        if canPass: # and isAsserted(report)
+        if canPass: # and isSupported(report)
             Switch.switchReport(report)
             requester = self.getSource()
             Proposition.recieveReport(self)
             self.getReportsBuffer().addReport(report)
+            return true
+        
+        return false
+
 
     def getId(channel: Channel):
         return channel.id

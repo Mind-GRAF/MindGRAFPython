@@ -4,8 +4,8 @@ from Report import Report
 import Report
 class ReportSet(Report):
     reports = []
-    def __innit__(self):
-        pass
+    def __innit__(self,reports: Report):
+        self.reports = []
 
     def addReport(reports,report: Report):
         reports.append(report)

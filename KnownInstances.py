@@ -8,23 +8,23 @@ class KnownInstances(Report):
             'Substitutions' : reportSet
     }
 
-    def __init__(knowninstances: KnownInstances ,substitution: Substitutions, support: supportSet ,source: Node ,destination: Node):
-        super.__init__(substitution, support,source,destination)
+    def __init__(self,knowninstances: KnownInstances ,substitution: Substitutions, support: supportSet ,source: Node ,destination: Node,attitude: str):
+        super.__init__(substitution, support,source,destination,attitude)
      
 
-    def addReport(report: Report):
+    def addReport(self,report: Report):
         reportSubs: Substitutions
         reportSubs = report
         report.getSubstitution()
-        reportSet = knowninstances.pop(reportSubs)
+        reportSet = self.pop(reportSubs)
         if reportSet == None: 
             reportSet = []
         reportSet.append(report)
-        knowninstances.update(reportSubs,reportSet)
+        self.update(reportSubs,reportSet)
 
 
-    def getReportBySubs(Subs: Substitutions):
-        return knowninstances.get('Substitutions')
+    def getReportBySubs(self):
+        return self.getSubstitution()
     
-    def getSubstitution(report: Report):
+    def getSubstitution(self,report: Report):
         pass

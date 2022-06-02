@@ -34,7 +34,7 @@ class Runner():
                 print("In ActQ")
                 runNext = actQ.pop()
                 print(runNext)
-                if highQ and lowQ:
+                if highQ or lowQ:
                     Runner.run()
         
     def addToHighQ(node: Node):
