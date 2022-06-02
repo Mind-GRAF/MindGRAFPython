@@ -1,6 +1,3 @@
-from multiprocessing import context
-import re
-from urllib import request
 from Filter import Filter
 from Proposition import Proposition
 from ReportSet import ReportSet
