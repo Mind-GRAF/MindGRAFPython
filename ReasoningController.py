@@ -104,8 +104,6 @@ class ReasoningController:
                     toBeSentToMatch = self.removeAlreadyWorkingOn(matchingNodes,channel)
                     self.sendRequestsToMatches(toBeSentToMatch,currentContextName)
 
-
-
     def getNodesToSendReport(self,type, context: Context, substitutions: Substitutions, inferenceType: str ,source: Node,destination: Node):
         suppSet = supportSet()
         suppSet.add(suppSet.getId())

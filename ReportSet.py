@@ -1,7 +1,5 @@
 from Report import Report
 
-
-import Report
 class ReportSet(Report):
     reports = []
     def __innit__(self,reports: Report):

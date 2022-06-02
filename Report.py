@@ -1,4 +1,7 @@
 from Substitutions import Substitutions
+from supportSet import supportSet
+from Node import Node
+from Report import Report
 class Report:
     def __init__(self,substitution: Substitutions,support: supportSet,inference: str,source: Node,
     destination: Node,attitude: str):
@@ -41,11 +44,11 @@ class Report:
         reportInfType = report.getInferenceType()
         instanceSupport = self.getSupport()
         reportSupport = report.getSupport()
-        bool supportCheck = instanceSupport is reportSupport
+        supportCheck = instanceSupport is reportSupport
         if(instanceInfType == "BACKWARD" and reportInfType == "FORWARD"):
             return report
-        else if(not supportCheck):
-            if(instanceInfType == "FORWARD" and reportInfType == "BACKWARD")
+        elif(not supportCheck):
+            if(instanceInfType == "FORWARD" and reportInfType == "BACKWARD"):
                 report.setInferenceType("FORWARD")
             return report
         return None

@@ -1,4 +1,7 @@
 from Channel import Channel
+from Filter import Filter
+from Switch import Switch
+from Node import Node
 import ChannelType
 class ChannelSet(Channel):
    
