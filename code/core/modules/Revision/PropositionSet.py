@@ -1,7 +1,9 @@
 #from path to proposition
 class PropositionSet(Proposition):
-        def __init__(self, id):
+        def __init__(self, id, name, propset):
+            self.name   = name
             self.id   = id
+            self.propSet = propSet
             
      
     #creating list 
@@ -10,14 +12,16 @@ class PropositionSet(Proposition):
         
     
     #appending instances of class proposition to this proposition set     
-        def addToPropSet(Proposition p):
-            propSet.append(p.id)
+        def addToPropSet(node):
+            propSet.append(node.id)
         
         def isEmpty():
             if len(propSet)==0:
-                print('the proposition set is empty')
+                return True
+            else:
+                return False
                 
-        def remove(prop):
-            propSet.remove(p)
+        def remove(node):
+            self.propSet.remove(node.id)
         
             
