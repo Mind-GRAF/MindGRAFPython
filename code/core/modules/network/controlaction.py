@@ -1,15 +1,14 @@
-
-from operator import truediv
 from act import act
+from actionnode import actionnode , abstractmethod
 
 
-class controlAction (act):
+class controlaction (actionnode):
     def __init__(self) -> None:
         super().__init__()
-        set_primitive(True)
+        actionnode.set_primitive(True)
         
     
     def __init__(self,identity):
         super().__init__(identity)
-        set_primitive(True)    
+        actionnode.set_primitive(True)    
         

@@ -2,10 +2,10 @@ import random
 
 from act import act
 from agenda import agenda
-from controlaction import controlAction
+from controlaction import controlaction
 
 #to run this class we will remove anything comes from outside to make sure the function works
-class DoOne (): #subclass of control action
+class DoOne (controlaction): #subclass of control action
     def __init__(self) -> None:
       super().__init__()
     
@@ -13,17 +13,16 @@ class DoOne (): #subclass of control action
         super().__init__(identity)  
       
         
-    def perform (): # take an act
-        acts = ["one","two","three","four","five"]
-        #acts = []
-        #acts.append("act.getDownCableSet().getDownCable("do").getNodeSet()")
+    def perform (act): # take an act
+        
+        acts = []
+        acts.append(act.cable.getDownCableSet().getDownCable("do").getNodeSet())
         next_act = random.choice(acts)
-        #act.stage = agenda.start
-        #Runner.addtoactqueuen(next_act)
-        print(next_act)
+        act.stage = agenda.start
+        Runner.addtoActQ(next_act)
+        
     
     
-    perform()
     
     
     

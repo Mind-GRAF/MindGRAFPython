@@ -2,13 +2,14 @@
 from act import act
 from agenda import agenda
 from controlaction import controlAction
-from realtion import relation
+
 
 
 class SNIterate (controlAction):
    def __init__(self) -> None:
         super().__init__()
-    def __init__(self, identity):
+        
+   def __init__(self, identity):
         super().__init__(identity)    
 
 
@@ -31,8 +32,11 @@ class SNIterate (controlAction):
             guards.append(n.getDownCableSet().getDownCable("guard").getNodeSet())
             
         for guard in guards:
-            # should be actToPropchannel with currentcontext with requester "ACT" and reporter (guard)
-            ##and this instance guard recieve request from this acttoprop channnel
+            
+            acttopropchannel =  #currentcontext with requester "ACT" and reporter (guard)
+            #and this instance guard recieve request from this acttoprop channnel
+            guard.recieverequest(acttopropchannel)
+            
             # asserting proconditions with this new channel
              
               
@@ -40,7 +44,7 @@ class SNIterate (controlAction):
         
         
         
-    def test(act) :
+    def test(act):
         possible_acts = []
         all_guard_act = []
         satisfied_guard = []
